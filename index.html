@@ -23,7 +23,19 @@
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <!-- Fallback UI: will be replaced by Vue if it mounts successfully -->
+      <div style="font-family: Arial, sans-serif; padding:24px; text-align:center;">
+        <h1>Rec Album</h1>
+        <p>Se o app não carregar, use os botões abaixo para acessar as funções básicas.</p>
+        <div style="display:flex; gap:8px; justify-content:center; margin-top:16px;">
+          <a href="/fallback/login.html" style="padding:10px 16px; background:#3880ff; color:white; border-radius:6px; text-decoration:none;">Entrar</a>
+          <a href="/fallback/register.html" style="padding:10px 16px; background:#10dc60; color:white; border-radius:6px; text-decoration:none;">Cadastrar</a>
+          <a href="/fallback/about.html" style="padding:10px 16px; background:#999; color:white; border-radius:6px; text-decoration:none;">Sobre</a>
+        </div>
+        <p style="margin-top:18px; color:#666; font-size:14px;">Se preferir a versão nativa, abra o projeto Android no Android Studio.</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 

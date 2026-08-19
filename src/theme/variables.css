@@ -1,2 +1,11 @@
+:root {
+  --ion-color-primary: #5b21b6;
+  --ion-color-primary-rgb: 91,33,182;
+  --ion-color-secondary: #ffb86b;
+  --ion-color-medium: #9a9a9a;
+  --ion-font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+html, body, #app { height: 100%; }
 /* For information on how to create your own theme, please refer to:
 http://ionicframework.com/docs/theming/ */
