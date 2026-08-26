@@ -50,7 +50,7 @@
                       <span v-else>Cadastrar</span>
                     </ion-button>
 
-                    <ion-button fill="clear" expand="block" @click="goToLogin">Já tenho conta</ion-button>
+                    <ion-button type="button" fill="clear" expand="block" @click="goToLogin">Já tenho conta</ion-button>
                   </div>
                 </form>
               </ion-card-content>
@@ -69,6 +69,27 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonButton,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonToast,
+  IonIcon,
+  IonSpinner,
+  IonText,
+} from '@ionic/vue';
 import { personAdd, eye as eyeIcon, eyeOff as eyeOffIcon } from 'ionicons/icons';
 
 const router = useRouter();
@@ -132,9 +153,13 @@ const eyeOff = eyeOffIcon;
 </script>
 
 <style scoped>
-.login-grid { min-height: calc(100vh - 56px); display: flex; align-items: center; }
+.login-grid { width: 100%; max-width: 560px; min-height: calc(100vh - 56px); margin: 0 auto; padding: 16px 8px; display: flex; align-items: center; }
 .logo-icon { color: var(--ion-color-primary); font-size: 56px; margin-bottom: 6px; }
 .muted { color: var(--ion-color-medium); }
 .small-text { font-size: 12px; margin-top: 8px; }
 ion-card { box-shadow: 0 6px 18px rgba(0,0,0,0.06); border-radius: 12px; }
+@media (max-width: 420px) {
+  .login-grid { padding-inline: 0; }
+  ion-card { margin-inline: 4px; }
+}
 </style>

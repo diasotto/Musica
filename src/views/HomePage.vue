@@ -56,7 +56,6 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      <!-- FAB -->
       <ion-fab vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button @click="goToCreate">
           <ion-icon :icon="add"></ion-icon>
@@ -69,38 +68,48 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButtons,
+  IonButton,
+  IonIcon,
+  IonContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonCard,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonCardContent,
+  IonFab,
+  IonFabButton,
+} from '@ionic/vue';
 import { add as addIcon, logOut as logOutIcon, trash as trashIcon, star as starIconImport, starOutline as starOutlineImport, heart as heartIconImport } from 'ionicons/icons';
 
 const router = useRouter();
 const albums = ref<Array<any>>([]);
-const openAdd = ref(false);
-const form = ref({ title: '', artist: '', year: '', cover: '' });
 const userName = ref<string | null>(null);
 
 function loadAlbums() {
   const raw = localStorage.getItem('albums');
-  albums.value = raw ? JSON.parse(raw) : [];
+  try {
+    const parsed = raw ? JSON.parse(raw) : [];
+    albums.value = Array.isArray(parsed) ? parsed : [];
+  } catch {
+    albums.value = [];
+  }
 }
 
 function persist() {
   localStorage.setItem('albums', JSON.stringify(albums.value));
 }
 
-function saveAlbum() {
-  if (!form.value.title || !form.value.artist) return;
-  albums.value.unshift({
-    id: Date.now().toString(),
-    title: form.value.title,
-    artist: form.value.artist,
-    year: form.value.year,
-    cover: form.value.cover,
-  });
-  persist();
-  form.value = { title: '', artist: '', year: '', cover: '' };
-  openAdd.value = false;
-}
-
 function removeAlbum(index: number) {
+  if (!window.confirm('Excluir este álbum?')) return;
   albums.value.splice(index, 1);
   persist();
 }

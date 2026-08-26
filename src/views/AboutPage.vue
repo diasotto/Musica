@@ -3,7 +3,7 @@
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-back-button default-href="/" />
+          <ion-back-button default-href="/tabs/tab1" />
         </ion-buttons>
         <ion-title>Sobre</ion-title>
       </ion-toolbar>
@@ -50,6 +50,22 @@
 
 <script setup lang="ts">
 import { APP_VERSION, APP_NAME } from '@/app.config';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonTitle,
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+  IonItem,
+  IonLabel,
+} from '@ionic/vue';
 const version = APP_VERSION;
 const appName = APP_NAME;
 </script>

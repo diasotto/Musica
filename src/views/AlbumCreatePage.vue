@@ -40,6 +40,7 @@
       <div class="ion-margin-top">
         <ion-button expand="block" @click="save">Salvar álbum</ion-button>
       </div>
+      <ion-toast :is-open="showToast" :message="toastMessage" duration="2200" @did-dismiss="showToast = false" />
     </ion-content>
   </ion-page>
 </template>
@@ -47,6 +48,22 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonTextarea,
+  IonButton,
+  IonToast,
+} from '@ionic/vue';
 
 const router = useRouter();
 const title = ref('');
@@ -54,10 +71,17 @@ const artist = ref('');
 const year = ref('');
 const songsText = ref('');
 const cover = ref('');
+const showToast = ref(false);
+const toastMessage = ref('');
 
 function loadAlbums() {
   const raw = localStorage.getItem('albums');
-  return raw ? JSON.parse(raw) : [];
+  try {
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
 }
 
 function saveAlbums(arr: any[]) {
@@ -65,9 +89,13 @@ function saveAlbums(arr: any[]) {
 }
 
 function save() {
-  if (!title.value || !artist.value) return;
+  if (!title.value.trim() || !artist.value.trim()) {
+    toastMessage.value = 'Preencha o título e o artista.';
+    showToast.value = true;
+    return;
+  }
   const albums = loadAlbums();
-  const songs = songsText.value
+  const songs = String(songsText.value || '')
     .split('\n')
     .map((s) => s.trim())
     .filter((s) => s.length);
